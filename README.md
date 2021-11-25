@@ -1,4 +1,4 @@
-Bugtracker Diagnostics UI
+Bugtracker Diagnostics UI Plugin
 
 UI - Aufbau
 
