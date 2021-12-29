@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Bugtracker.Configuration;
+using Bugtracker.GUI;
 using Bugtracker.Plugin;
 
-namespace Bugtracker.GUI
+namespace Bugtracker_UI
 {
     internal class UiPlugin : IPlugin
     {
@@ -20,14 +21,14 @@ namespace Bugtracker.GUI
         {
             RunningConfiguration runningConfiguration = RunningConfiguration.GetInstance();
 
-            System.Windows.Forms.Application.EnableVisualStyles();
-            
-            runningConfiguration.MainGui = new Bugtracker();
+            Application.EnableVisualStyles();
+
+            runningConfiguration.MainGui = new Bugtracker_Form();
 
             //Hide Console
             runningConfiguration.HideConsole = true;
 
-            System.Windows.Forms.Application.Run(RunningConfiguration.GetInstance().MainGui);
+            Application.Run(RunningConfiguration.GetInstance().MainGui);
         }
     }
 

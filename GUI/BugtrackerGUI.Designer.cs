@@ -1,7 +1,7 @@
 ﻿
 namespace Bugtracker.GUI
 {
-    partial class Bugtracker
+    partial class Bugtracker_Form
     {
         /// <summary>
         /// Required designer variable.
@@ -30,10 +30,10 @@ namespace Bugtracker.GUI
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Bugtracker));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Bugtracker_Form));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.applicationPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.applicationCheckbox = new System.Windows.Forms.CheckBox();
+            this.screenshotCheckbox = new System.Windows.Forms.CheckBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.problemDescription = new System.Windows.Forms.TextBox();
             this.problemCategories = new System.Windows.Forms.ComboBox();
@@ -81,36 +81,37 @@ namespace Bugtracker.GUI
             // 
             // applicationPanel
             // 
-            this.applicationPanel.Controls.Add(this.applicationCheckbox);
+            this.applicationPanel.Controls.Add(this.screenshotCheckbox);
             this.applicationPanel.Location = new System.Drawing.Point(6, 34);
             this.applicationPanel.Name = "applicationPanel";
             this.applicationPanel.Size = new System.Drawing.Size(407, 201);
             this.applicationPanel.TabIndex = 0;
             // 
-            // applicationCheckbox
+            // screenshotCheckbox
             // 
-            this.applicationCheckbox.AutoSize = true;
-            this.applicationCheckbox.Checked = true;
-            this.applicationCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.applicationCheckbox.Location = new System.Drawing.Point(3, 3);
-            this.applicationCheckbox.Margin = new System.Windows.Forms.Padding(3, 3, 300, 3);
-            this.applicationCheckbox.Name = "applicationCheckbox";
-            this.applicationCheckbox.Size = new System.Drawing.Size(61, 19);
-            this.applicationCheckbox.TabIndex = 0;
-            this.applicationCheckbox.Text = "Screen";
-            this.applicationCheckbox.UseVisualStyleBackColor = true;
+            this.screenshotCheckbox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.screenshotCheckbox.Checked = true;
+            this.screenshotCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.screenshotCheckbox.Location = new System.Drawing.Point(3, 3);
+            this.screenshotCheckbox.Margin = new System.Windows.Forms.Padding(3, 3, 300, 3);
+            this.screenshotCheckbox.MinimumSize = new System.Drawing.Size(75, 35);
+            this.screenshotCheckbox.Name = "screenshotCheckbox";
+            this.screenshotCheckbox.Size = new System.Drawing.Size(75, 35);
+            this.screenshotCheckbox.TabIndex = 0;
+            this.screenshotCheckbox.Text = "Screen";
+            this.screenshotCheckbox.UseVisualStyleBackColor = true;
             // 
             // menuStrip1
             // 
             this.menuStrip1.Location = new System.Drawing.Point(0, 24);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(434, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(834, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // problemDescription
             // 
-            this.problemDescription.Location = new System.Drawing.Point(18, 190);
+            this.problemDescription.Location = new System.Drawing.Point(18, 195);
             this.problemDescription.Multiline = true;
             this.problemDescription.Name = "problemDescription";
             this.problemDescription.Size = new System.Drawing.Size(407, 81);
@@ -119,7 +120,7 @@ namespace Bugtracker.GUI
             // problemCategories
             // 
             this.problemCategories.FormattingEnabled = true;
-            this.problemCategories.Location = new System.Drawing.Point(18, 138);
+            this.problemCategories.Location = new System.Drawing.Point(18, 144);
             this.problemCategories.Name = "problemCategories";
             this.problemCategories.Size = new System.Drawing.Size(407, 23);
             this.problemCategories.TabIndex = 3;
@@ -128,7 +129,7 @@ namespace Bugtracker.GUI
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(18, 120);
+            this.label1.Location = new System.Drawing.Point(18, 121);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(105, 15);
             this.label1.TabIndex = 4;
@@ -137,7 +138,7 @@ namespace Bugtracker.GUI
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 170);
+            this.label2.Location = new System.Drawing.Point(18, 173);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(127, 15);
             this.label2.TabIndex = 5;
@@ -149,7 +150,7 @@ namespace Bugtracker.GUI
             this.captureAndSendButton.Name = "captureAndSendButton";
             this.captureAndSendButton.Size = new System.Drawing.Size(407, 40);
             this.captureAndSendButton.TabIndex = 6;
-            this.captureAndSendButton.Text = "Aufzeichnen und senden";
+            this.captureAndSendButton.Text = "Aufzeichnen und beenden";
             this.captureAndSendButton.UseVisualStyleBackColor = true;
             this.captureAndSendButton.Click += new System.EventHandler(this.captureAndSendButton_Click);
             // 
@@ -176,7 +177,7 @@ namespace Bugtracker.GUI
             this.toolStripMenuItem1});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Size = new System.Drawing.Size(434, 24);
+            this.menuStrip2.Size = new System.Drawing.Size(834, 24);
             this.menuStrip2.TabIndex = 9;
             this.menuStrip2.Text = "menuStrip2";
             // 
@@ -220,6 +221,7 @@ namespace Bugtracker.GUI
             this.alleToolStripMenuItem.Name = "alleToolStripMenuItem";
             this.alleToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
             this.alleToolStripMenuItem.Text = "Alle";
+            this.alleToolStripMenuItem.Click += new System.EventHandler(this.MakeScreenshotToolStripMenuItemClick);
             // 
             // bereichToolStripMenuItem
             // 
@@ -240,12 +242,14 @@ namespace Bugtracker.GUI
             this.reproduzierbarToolStripMenuItem.Name = "reproduzierbarToolStripMenuItem";
             this.reproduzierbarToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.reproduzierbarToolStripMenuItem.Text = "Reproduzierbar";
+            this.reproduzierbarToolStripMenuItem.Click += new System.EventHandler(this.reproduzierbarToolStripMenuItem_Click);
             // 
             // beendenToolStripMenuItem
             // 
             this.beendenToolStripMenuItem.Name = "beendenToolStripMenuItem";
             this.beendenToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.beendenToolStripMenuItem.Text = "Beenden";
+            this.beendenToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItemClick);
             // 
             // zeigeLogToolStripMenuItem
             // 
@@ -317,7 +321,7 @@ namespace Bugtracker.GUI
             this.serverStatusLabel});
             this.statusStrip1.Location = new System.Drawing.Point(0, 579);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(434, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(834, 22);
             this.statusStrip1.TabIndex = 16;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -338,17 +342,17 @@ namespace Bugtracker.GUI
             // serverStatusLabel
             // 
             this.serverStatusLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.serverStatusLabel.ForeColor = System.Drawing.Color.Green;
+            this.serverStatusLabel.ForeColor = System.Drawing.Color.Black;
             this.serverStatusLabel.Name = "serverStatusLabel";
             this.serverStatusLabel.Size = new System.Drawing.Size(67, 17);
             this.serverStatusLabel.Text = "Connected";
             this.serverStatusLabel.Click += new System.EventHandler(this.toolStripStatusLabel3_Click);
             // 
-            // Bugtracker
+            // Bugtracker_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(434, 601);
+            this.ClientSize = new System.Drawing.Size(834, 601);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.configFileSourceLabel);
             this.Controls.Add(this.label5);
@@ -369,11 +373,10 @@ namespace Bugtracker.GUI
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
-            this.Name = "Bugtracker";
+            this.Name = "Bugtracker_Form";
             this.Text = "Bugtracker";
             this.groupBox1.ResumeLayout(false);
             this.applicationPanel.ResumeLayout(false);
-            this.applicationPanel.PerformLayout();
             this.menuStrip2.ResumeLayout(false);
             this.menuStrip2.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
@@ -415,7 +418,7 @@ namespace Bugtracker.GUI
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel lastConnectionTimeLabel;
-        private System.Windows.Forms.CheckBox applicationCheckbox;
+        private System.Windows.Forms.CheckBox screenshotCheckbox;
         private System.Windows.Forms.ToolStripStatusLabel serverStatusLabel;
     }
 }
