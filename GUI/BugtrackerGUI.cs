@@ -1,10 +1,10 @@
-﻿using System.Configuration;
-using Bugtracker.Capture.Log;
+﻿using Bugtracker.Capture.LogProcessing;
+using Bugtracker.Capture.Screen;
 using Bugtracker.Configuration;
 using Bugtracker.InternalApplication;
 using Bugtracker.Logging;
 using Bugtracker.Problem_Descriptors;
-using Bugtracker.Sending;
+using Bugtracker.Send;
 using Bugtracker.Utils;
 using Bugtracker_UI.GUI;
 using Application = Bugtracker.InternalApplication.Application;
@@ -16,7 +16,7 @@ namespace Bugtracker.GUI
     /// </summary>
     public partial class Bugtracker_Form : Form
     {
-        private readonly RunningConfiguration runningConfiguration = new RunningConfiguration();
+        private readonly RunningConfiguration runningConfiguration = RunningConfiguration.GetInstance();
         private readonly TextBox loggingBox;
         private bool showLogging = false;
         private PCInfo pcinfo;
@@ -28,10 +28,14 @@ namespace Bugtracker.GUI
         /// </summary>
         public Bugtracker_Form()
         {
+            this.CenterToScreen();
+
             InitializeComponent();
 
             RunningConfiguration rc = runningConfiguration;
             loggingBox = (TextBox) this.Controls.Find("bugtrackLog", true)[0];
+
+            RemoteSessionLabel.Text = runningConfiguration.IsRemoteSession.ToString();
 
             ScreenshotTimer.Interval = (2000);
 
@@ -44,7 +48,7 @@ namespace Bugtracker.GUI
             CheckStandardApplications(rc);
 
             //Load in log file content
-            loggingBox.AppendText(BugtrackerUtils.LoadFileContentAsString("C:\\Bugtracker\\bugtracker.log"));
+            loggingBox.AppendText(BugtrackerUtils.LoadFileContentAsString(Globals_and_Information.Globals.LOG_FILE_PATH));
 
 
             configFileSourceLabel.Text = runningConfiguration.ConfigSource.ToString();
@@ -77,12 +81,10 @@ namespace Bugtracker.GUI
             if(runningConfiguration.ServerStatus == ServerStatus.Available)
             {
                 serverStatusLabel.Text = "Available";
-                //serverStatusLabel.ForeColor = Color.Green;
             }
             else
             {
                 serverStatusLabel.Text = "Not Available";
-                //serverStatusLabel.ForeColor = Color.Red;
             }
 
             lastConnectionTimeLabel.Text = runningConfiguration.ServerLastConnectionTime.ToLongTimeString();
@@ -149,7 +151,7 @@ namespace Bugtracker.GUI
 
         private void problemCategories_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            ChangeCheckBoxIsChecked(false);
+            ChangeCheckBoxState(false);
 
             var cb = (ComboBox) sender;
 
@@ -171,7 +173,7 @@ namespace Bugtracker.GUI
             var pc = RunningConfiguration.GetInstance().ProblemManager.GetProblemCategoryByName(problemCategoryName);
 
             if (pc.SelectAllApplications)
-                ChangeCheckBoxIsChecked(true);
+                ChangeCheckBoxState(true);
                 
 
             foreach(Control c in Controls.Find("applicationCheckbox", true))
@@ -192,13 +194,13 @@ namespace Bugtracker.GUI
             }
         }
 
-        public void ChangeCheckBoxIsChecked(bool checkOrNotCheck)
+        public void ChangeCheckBoxState(bool @checked)
         {
             foreach(Control c in Controls.Find("applicationCheckbox", true))
             {
                 if(c is CheckBox)
                 {
-                    ((CheckBox)c).Checked = checkOrNotCheck;
+                    ((CheckBox)c).Checked = @checked;
                 }
             }
         }
@@ -206,12 +208,14 @@ namespace Bugtracker.GUI
 
         private void ShowLoggingWindow()
         {
+            ToggleLog.Checked = true;
             this.Size = new Size(850, 625);
             showLogging = true;
         }
 
         private void HideLoggingWindow()
         {
+            ToggleLog.Checked = false;
             this.Size = new Size(450, 625);
             showLogging = false;
         }
@@ -219,6 +223,7 @@ namespace Bugtracker.GUI
         private void DelayedScreencapture(object sender, EventArgs e)
         {
             BugtrackerUtils.GenerateScreenCapture();
+
             ScreenshotTimer.Stop();
 
             ScreenshotTimer.Interval = 2000;
@@ -237,16 +242,8 @@ namespace Bugtracker.GUI
             ScreenshotTimer.Dispose();
         }
 
-        private void captureAndSendButton_Click(object sender, EventArgs e)
+        private List<InternalApplication.Application> GetAllTargetedApplications()
         {
-            if (screenshotCheckbox.Checked)
-            {
-                ScreenshotTimer.Tick += DelayScreenshot;
-                this.WindowState = FormWindowState.Minimized;
-                ScreenshotTimer.Start();
-            }
-                
-
             List<InternalApplication.Application> targetedApplications = new List<InternalApplication.Application>();
             ApplicationManager am = runningConfiguration.ApplicationManager;
 
@@ -258,17 +255,33 @@ namespace Bugtracker.GUI
 
             foreach (var app in runningConfiguration.ApplicationManager.Applications)
             {
-                if(app.IsStandard)
+                if (app.IsStandard)
                     targetedApplications.Add(app);
             }
 
-            LogfileFetcher lff = new LogfileFetcher(targetedApplications);
-            lff.FetchAllLogFiles();
+            return targetedApplications;
+        }
+
+        private void StartScreenshotRoutine()
+        {
+            if (screenshotCheckbox.Checked)
+            {
+                ScreenshotTimer.Tick += DelayScreenshot;
+                this.WindowState = FormWindowState.Minimized;
+                ScreenshotTimer.Start();
+            }
+        }
+
+        private void CaptureSendCloseButton(object sender, EventArgs e)
+        {
+            StartScreenshotRoutine();
+
+            List<InternalApplication.Application> targetedApplications = GetAllTargetedApplications();
+
+            LogProcessor.FetchAllLogFiles(targetedApplications);
 
             if (targetedApplications.Count == 0)
                 MessageBox.Show("Keine Applikation ausgewählt.");
-
-            
         }
 
         private ProblemDescriptor GetCurrentProblemDescriptor()
@@ -301,8 +314,12 @@ namespace Bugtracker.GUI
             return applicationNames;
         }
 
+        private void MaximizeBugtracker(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Normal;
+        }
 
-        private void zeigeLogToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ToggleLogToolStrip(object sender, EventArgs e)
         {
             if (showLogging == false)
                 ShowLoggingWindow();
@@ -310,52 +327,48 @@ namespace Bugtracker.GUI
                 HideLoggingWindow();
         }
 
-        private void computerInfosToolStripMenuItem_Click(object sender, EventArgs e)
+        private void RenameTargetedLogsToolStrip(object sender, EventArgs e)
+        {
+            LogProcessor.RenameAllTargeted(GetAllTargetedApplications());
+        }
+
+        private void DeleteTargetedLogsToolStrip(object sender, EventArgs e)
+        {
+            LogProcessor.DeleteAllTargeted(GetAllTargetedApplications());
+        }
+
+        private void ReproducableScreenshotToolStrip(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+            Reproduzirbar reprodForm = new Reproduzirbar();
+            reprodForm.TopMost = true;
+            reprodForm.Show(this);
+            reprodForm.Disposed += new EventHandler(MaximizeBugtracker);
+        }
+
+        private void ScreenshotAllToolStrip(object sender, EventArgs e)
+        {
+            BugtrackerUtils.GenerateScreenCapture();
+        }
+
+        private void ComputerInfoToolStrip(object sender, EventArgs e)
         {
             if (pcinfo == null || pcinfo.IsDisposed)
                 pcinfo = new PCInfo();
 
 
-            pcinfo.Show();
+            pcinfo.Show(this);
         }
 
-        private void toolStripStatusLabel1_Click(object sender, EventArgs e)
+        private void SnippingToolToolStrip(object sender, EventArgs e)
         {
-
+            ScreenCaptureHandler sch = new ScreenCaptureHandler();
+            sch.GenerateScreenshotFromBitmap(runningConfiguration.NewestBugtrackerFolder.FullName, new Bitmap(SnippingTool.Snip()));
         }
 
-        private void toolStripStatusLabel3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ExitToolStripMenuItemClick(object sender, EventArgs e)
+        private void ExitToolStrip(object sender, EventArgs e)
         {
             this.Dispose();
-        }
-
-        private void MakeScreenshotToolStripMenuItemClick(object sender, EventArgs e)
-        {
-            BugtrackerUtils.GenerateScreenCapture();
-        }
-
-        private void consoleButton_Click(object sender, EventArgs e)
-        {
-            //BugtrackerUtils.StartCommandLineApplication(new []{ "" });
-        }
-
-        private void reproduzierbarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-            Reproduzirbar reprodForm = new Reproduzirbar();
-            reprodForm.TopMost = true;
-            reprodForm.Show();
-            reprodForm.Disposed += new EventHandler(MaximizeBugtracker);
-        }
-
-        private void MaximizeBugtracker(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Normal;
         }
     }
 }

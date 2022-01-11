@@ -46,13 +46,15 @@ namespace Bugtracker.GUI
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.computerInfosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mailversandAktivierenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToggleLog = new System.Windows.Forms.ToolStripMenuItem();
+            this.beendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.funktionenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.logsLöschenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.logsUmbennennToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.screenshotErstellenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.alleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bereichToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aufzeichnenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reproduzierbarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.beendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.zeigeLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pcName = new System.Windows.Forms.Label();
             this.bugtrackLog = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -63,6 +65,8 @@ namespace Bugtracker.GUI
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lastConnectionTimeLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.serverStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.RemoteSessionLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox1.SuspendLayout();
             this.applicationPanel.SuspendLayout();
             this.menuStrip2.SuspendLayout();
@@ -152,7 +156,7 @@ namespace Bugtracker.GUI
             this.captureAndSendButton.TabIndex = 6;
             this.captureAndSendButton.Text = "Aufzeichnen und beenden";
             this.captureAndSendButton.UseVisualStyleBackColor = true;
-            this.captureAndSendButton.Click += new System.EventHandler(this.captureAndSendButton_Click);
+            this.captureAndSendButton.Click += new System.EventHandler(this.CaptureSendCloseButton);
             // 
             // label3
             // 
@@ -174,7 +178,8 @@ namespace Bugtracker.GUI
             // menuStrip2
             // 
             this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1});
+            this.toolStripMenuItem1,
+            this.funktionenToolStripMenuItem});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
             this.menuStrip2.Size = new System.Drawing.Size(834, 24);
@@ -186,77 +191,94 @@ namespace Bugtracker.GUI
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.computerInfosToolStripMenuItem,
             this.mailversandAktivierenToolStripMenuItem,
-            this.screenshotErstellenToolStripMenuItem,
-            this.aufzeichnenToolStripMenuItem,
-            this.beendenToolStripMenuItem,
-            this.zeigeLogToolStripMenuItem});
+            this.ToggleLog,
+            this.beendenToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(67, 20);
-            this.toolStripMenuItem1.Text = "Aktionen";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(69, 20);
+            this.toolStripMenuItem1.Text = "Optionen";
             // 
             // computerInfosToolStripMenuItem
             // 
             this.computerInfosToolStripMenuItem.Name = "computerInfosToolStripMenuItem";
             this.computerInfosToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.computerInfosToolStripMenuItem.Text = "Computer Infos";
-            this.computerInfosToolStripMenuItem.Click += new System.EventHandler(this.computerInfosToolStripMenuItem_Click);
+            this.computerInfosToolStripMenuItem.Click += new System.EventHandler(this.ComputerInfoToolStrip);
             // 
             // mailversandAktivierenToolStripMenuItem
             // 
+            this.mailversandAktivierenToolStripMenuItem.Enabled = false;
             this.mailversandAktivierenToolStripMenuItem.Name = "mailversandAktivierenToolStripMenuItem";
             this.mailversandAktivierenToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.mailversandAktivierenToolStripMenuItem.Text = "Mailversand aktivieren";
             // 
-            // screenshotErstellenToolStripMenuItem
+            // ToggleLog
             // 
-            this.screenshotErstellenToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.alleToolStripMenuItem,
-            this.bereichToolStripMenuItem});
-            this.screenshotErstellenToolStripMenuItem.Name = "screenshotErstellenToolStripMenuItem";
-            this.screenshotErstellenToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
-            this.screenshotErstellenToolStripMenuItem.Text = "Screenshot erstellen";
-            // 
-            // alleToolStripMenuItem
-            // 
-            this.alleToolStripMenuItem.Name = "alleToolStripMenuItem";
-            this.alleToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
-            this.alleToolStripMenuItem.Text = "Alle";
-            this.alleToolStripMenuItem.Click += new System.EventHandler(this.MakeScreenshotToolStripMenuItemClick);
-            // 
-            // bereichToolStripMenuItem
-            // 
-            this.bereichToolStripMenuItem.Name = "bereichToolStripMenuItem";
-            this.bereichToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
-            this.bereichToolStripMenuItem.Text = "Bereich";
-            // 
-            // aufzeichnenToolStripMenuItem
-            // 
-            this.aufzeichnenToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.reproduzierbarToolStripMenuItem});
-            this.aufzeichnenToolStripMenuItem.Name = "aufzeichnenToolStripMenuItem";
-            this.aufzeichnenToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
-            this.aufzeichnenToolStripMenuItem.Text = "Aufzeichnen";
-            // 
-            // reproduzierbarToolStripMenuItem
-            // 
-            this.reproduzierbarToolStripMenuItem.Name = "reproduzierbarToolStripMenuItem";
-            this.reproduzierbarToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.reproduzierbarToolStripMenuItem.Text = "Reproduzierbar";
-            this.reproduzierbarToolStripMenuItem.Click += new System.EventHandler(this.reproduzierbarToolStripMenuItem_Click);
+            this.ToggleLog.Name = "ToggleLog";
+            this.ToggleLog.Size = new System.Drawing.Size(192, 22);
+            this.ToggleLog.Text = "Toggle Log Fenster";
+            this.ToggleLog.Click += new System.EventHandler(this.ToggleLogToolStrip);
             // 
             // beendenToolStripMenuItem
             // 
             this.beendenToolStripMenuItem.Name = "beendenToolStripMenuItem";
             this.beendenToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.beendenToolStripMenuItem.Text = "Beenden";
-            this.beendenToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItemClick);
+            this.beendenToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStrip);
             // 
-            // zeigeLogToolStripMenuItem
+            // funktionenToolStripMenuItem
             // 
-            this.zeigeLogToolStripMenuItem.Name = "zeigeLogToolStripMenuItem";
-            this.zeigeLogToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
-            this.zeigeLogToolStripMenuItem.Text = "Toggle Log Fenster";
-            this.zeigeLogToolStripMenuItem.Click += new System.EventHandler(this.zeigeLogToolStripMenuItem_Click);
+            this.funktionenToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.logsLöschenToolStripMenuItem,
+            this.logsUmbennennToolStripMenuItem,
+            this.screenshotErstellenToolStripMenuItem});
+            this.funktionenToolStripMenuItem.Name = "funktionenToolStripMenuItem";
+            this.funktionenToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
+            this.funktionenToolStripMenuItem.Text = "Aktionen";
+            // 
+            // logsLöschenToolStripMenuItem
+            // 
+            this.logsLöschenToolStripMenuItem.Name = "logsLöschenToolStripMenuItem";
+            this.logsLöschenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.logsLöschenToolStripMenuItem.Text = "Logs löschen";
+            this.logsLöschenToolStripMenuItem.Click += new System.EventHandler(this.DeleteTargetedLogsToolStrip);
+            // 
+            // logsUmbennennToolStripMenuItem
+            // 
+            this.logsUmbennennToolStripMenuItem.Name = "logsUmbennennToolStripMenuItem";
+            this.logsUmbennennToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.logsUmbennennToolStripMenuItem.Text = "Logs umbenennen";
+            this.logsUmbennennToolStripMenuItem.Click += new System.EventHandler(this.RenameTargetedLogsToolStrip);
+            // 
+            // screenshotErstellenToolStripMenuItem
+            // 
+            this.screenshotErstellenToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.alleToolStripMenuItem,
+            this.bereichToolStripMenuItem,
+            this.reproduzierbarToolStripMenuItem});
+            this.screenshotErstellenToolStripMenuItem.Name = "screenshotErstellenToolStripMenuItem";
+            this.screenshotErstellenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.screenshotErstellenToolStripMenuItem.Text = "Screenshot erstellen";
+            // 
+            // alleToolStripMenuItem
+            // 
+            this.alleToolStripMenuItem.Name = "alleToolStripMenuItem";
+            this.alleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.alleToolStripMenuItem.Text = "Alle";
+            this.alleToolStripMenuItem.Click += new System.EventHandler(this.ScreenshotAllToolStrip);
+            // 
+            // bereichToolStripMenuItem
+            // 
+            this.bereichToolStripMenuItem.Name = "bereichToolStripMenuItem";
+            this.bereichToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.bereichToolStripMenuItem.Text = "Bereich";
+            this.bereichToolStripMenuItem.Click += new System.EventHandler(this.SnippingToolToolStrip);
+            // 
+            // reproduzierbarToolStripMenuItem
+            // 
+            this.reproduzierbarToolStripMenuItem.Name = "reproduzierbarToolStripMenuItem";
+            this.reproduzierbarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.reproduzierbarToolStripMenuItem.Text = "Reproduzierbar";
+            this.reproduzierbarToolStripMenuItem.Click += new System.EventHandler(this.ReproducableScreenshotToolStrip);
             // 
             // pcName
             // 
@@ -292,7 +314,7 @@ namespace Bugtracker.GUI
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(219, 9);
+            this.label5.Location = new System.Drawing.Point(221, 7);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(151, 15);
             this.label5.TabIndex = 13;
@@ -301,7 +323,7 @@ namespace Bugtracker.GUI
             // configFileSourceLabel
             // 
             this.configFileSourceLabel.AutoSize = true;
-            this.configFileSourceLabel.Location = new System.Drawing.Point(376, 9);
+            this.configFileSourceLabel.Location = new System.Drawing.Point(378, 7);
             this.configFileSourceLabel.Name = "configFileSourceLabel";
             this.configFileSourceLabel.Size = new System.Drawing.Size(46, 15);
             this.configFileSourceLabel.TabIndex = 14;
@@ -318,7 +340,9 @@ namespace Bugtracker.GUI
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.lastConnectionTimeLabel,
-            this.serverStatusLabel});
+            this.serverStatusLabel,
+            this.toolStripStatusLabel2,
+            this.RemoteSessionLabel});
             this.statusStrip1.Location = new System.Drawing.Point(0, 579);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(834, 22);
@@ -330,7 +354,6 @@ namespace Bugtracker.GUI
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(165, 17);
             this.toolStripStatusLabel1.Text = "Server letztes mal erreicht um:";
-            this.toolStripStatusLabel1.Click += new System.EventHandler(this.toolStripStatusLabel1_Click);
             // 
             // lastConnectionTimeLabel
             // 
@@ -346,7 +369,19 @@ namespace Bugtracker.GUI
             this.serverStatusLabel.Name = "serverStatusLabel";
             this.serverStatusLabel.Size = new System.Drawing.Size(67, 17);
             this.serverStatusLabel.Text = "Connected";
-            this.serverStatusLabel.Click += new System.EventHandler(this.toolStripStatusLabel3_Click);
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(96, 17);
+            this.toolStripStatusLabel2.Text = "Remote Session: ";
+            // 
+            // RemoteSessionLabel
+            // 
+            this.RemoteSessionLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.RemoteSessionLabel.Name = "RemoteSessionLabel";
+            this.RemoteSessionLabel.Size = new System.Drawing.Size(32, 17);
+            this.RemoteSessionLabel.Text = "True";
             // 
             // Bugtracker_Form
             // 
@@ -400,16 +435,10 @@ namespace Bugtracker.GUI
         private System.Windows.Forms.TextBox bugtrackTime;
         private System.Windows.Forms.MenuStrip menuStrip2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem computerInfosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mailversandAktivierenToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem screenshotErstellenToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem alleToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem bereichToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aufzeichnenToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem reproduzierbarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem beendenToolStripMenuItem;
         private System.Windows.Forms.Label pcName;
-        private System.Windows.Forms.ToolStripMenuItem zeigeLogToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ToggleLog;
         private System.Windows.Forms.TextBox bugtrackLog;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
@@ -420,5 +449,15 @@ namespace Bugtracker.GUI
         private System.Windows.Forms.ToolStripStatusLabel lastConnectionTimeLabel;
         private System.Windows.Forms.CheckBox screenshotCheckbox;
         private System.Windows.Forms.ToolStripStatusLabel serverStatusLabel;
+        private ToolStripStatusLabel toolStripStatusLabel2;
+        private ToolStripStatusLabel RemoteSessionLabel;
+        private ToolStripMenuItem funktionenToolStripMenuItem;
+        private ToolStripMenuItem computerInfosToolStripMenuItem;
+        private ToolStripMenuItem logsLöschenToolStripMenuItem;
+        private ToolStripMenuItem logsUmbennennToolStripMenuItem;
+        private ToolStripMenuItem screenshotErstellenToolStripMenuItem;
+        private ToolStripMenuItem alleToolStripMenuItem;
+        private ToolStripMenuItem bereichToolStripMenuItem;
+        private ToolStripMenuItem reproduzierbarToolStripMenuItem;
     }
 }

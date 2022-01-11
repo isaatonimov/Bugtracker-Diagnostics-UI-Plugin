@@ -8,6 +8,9 @@ namespace Bugtracker.GUI
         {
             InitializeComponent();
 
+            this.CenterToParent();
+            
+
             LoadPCInfo();
         }
 
