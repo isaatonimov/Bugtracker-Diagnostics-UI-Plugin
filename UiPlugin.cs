@@ -7,9 +7,7 @@ namespace Bugtracker_UI
     internal class UiPlugin : IPlugin
     {
         public string Name => "Bugtracker GUI";
-
         public string Version => "1.1";
-
         public string Author => "Dominik Beyerle";
 
         public void OnLoad()
@@ -18,7 +16,7 @@ namespace Bugtracker_UI
 
             Application.EnableVisualStyles();
 
-            runningConfiguration.MainGui = new Bugtracker_Form();
+            runningConfiguration.MainGui = new Bugtracker_Main_Form();
 
             //Hide Console
             runningConfiguration.HideConsole = true;

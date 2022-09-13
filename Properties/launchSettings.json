@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Bugtracker": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Users\\Dominik Beyerle\\Documents\\Bugtracker\\bin\\Debug\\net6.0-windows\\BugtrackerSystem.exe"
+    }
+  }
+}

@@ -11,17 +11,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MetroFramework" Version="1.2.0.3" />
     <PackageReference Include="System.ValueTuple" Version="4.5.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Bugtracker\Bugtracker.csproj" />
+    <ProjectReference Include="..\..\GLPITicketPlugin\GLPITicketPlugin.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="GUI\BugtrackerGUI.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Update="GUI\BugtrackerGUI.cs" />
     <Compile Update="GUI\PCInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -39,7 +39,7 @@
 
   <ItemGroup>
     <EmbeddedResource Update="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
@@ -51,8 +51,12 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Properties\DataSources\" />
+  </ItemGroup>
+
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="powershell.exe -ExecutionPolicy Bypass -NoProfile -NonInteractive -File &quot;C:\Users\Dominik Beyerle\Documents\post-build.ps1&quot;" />
+    <Exec Command="powershell.exe -ExecutionPolicy Bypass -NoProfile -NonInteractive -File &quot;C:\Users\Dominik Beyerle\Documents\GUIBugtracker\Bugtracker Diagnostics UI\post-build.ps1&quot;" />
   </Target>
 
 </Project>

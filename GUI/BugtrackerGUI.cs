@@ -7,6 +7,8 @@ using Bugtracker.Problem_Descriptors;
 using Bugtracker.Send;
 using Bugtracker.Utils;
 using Bugtracker_UI.GUI;
+using Bugtracker_UI.Utils;
+using Bugtracker_UI.Extensions;
 using Application = Bugtracker.InternalApplication.Application;
 
 namespace Bugtracker.GUI
@@ -14,7 +16,7 @@ namespace Bugtracker.GUI
     /// <summary>
     /// Default Form-Window for GUI
     /// </summary>
-    public partial class Bugtracker_Form : Form
+    public partial class Bugtracker_Main_Form : Form
     {
         private readonly RunningConfiguration runningConfiguration = RunningConfiguration.GetInstance();
         private readonly TextBox loggingBox;
@@ -23,11 +25,33 @@ namespace Bugtracker.GUI
         private System.Windows.Forms.Timer ScreenshotTimer = new System.Windows.Forms.Timer();
         private EventHandler DelayScreenshot;
 
+        //Begin: Main Form : dragable
+
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        public static extern bool ReleaseCapture();
+
+        private void Bugtracker_Main_Form_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+        }
+
+        //End: Main Form : dragable
+
         /// <summary>
         /// /Constructor
         /// </summary>
-        public Bugtracker_Form()
+        public Bugtracker_Main_Form()
         {
+
             this.CenterToScreen();
 
             InitializeComponent();
@@ -35,11 +59,15 @@ namespace Bugtracker.GUI
             RunningConfiguration rc = runningConfiguration;
             loggingBox = (TextBox) this.Controls.Find("bugtrackLog", true)[0];
 
-            RemoteSessionLabel.Text = runningConfiguration.IsRemoteSession.ToString();
-
             ScreenshotTimer.Interval = (2000);
 
             DelayScreenshot = new EventHandler(DelayedScreencapture);
+
+            applicationPanel.VerticalScroll.Enabled = true;
+            applicationPanel.VerticalScroll.Visible = true;
+            applicationPanel.HorizontalScroll.Enabled = false;
+            applicationPanel.HorizontalScroll.Visible = false;
+            applicationPanel.AutoScroll = true;
 
             LoadAllApplicationsAsCheckboxes(rc);
             LoadAllProblemCategories(rc);
@@ -50,20 +78,19 @@ namespace Bugtracker.GUI
             //Load in log file content
             loggingBox.AppendText(BugtrackerUtils.LoadFileContentAsString(Globals_and_Information.Globals.LOG_FILE_PATH));
 
-
             configFileSourceLabel.Text = runningConfiguration.ConfigSource.ToString();
 
             Server.CheckedServerStatus += new System.EventHandler(UpdateServerStatus);
             Logger.LoggedNewLine += new System.EventHandler(AppendLogs);
 
-            this.Size = new Size(450, 640);
+            this.Size = new Size(368, 650);
         }
 
         private void CheckStandardApplications(RunningConfiguration rc)
         {
             List<Control> applicationCheckboxes = new List<Control>(Controls.Find("applicationCheckbox", true));
 
-            foreach (var app in rc.ApplicationManager.Applications)
+            foreach (var app in rc.Applications.Applications)
             {
                 if (app.IsStandard)
                 {
@@ -76,18 +103,26 @@ namespace Bugtracker.GUI
             }
         }
 
-        private void UpdateServerStatus(object sender, EventArgs args)
+        private async void UpdateServerStatus(object sender, EventArgs args)
         {
             if(runningConfiguration.ServerStatus == ServerStatus.Available)
             {
-                serverStatusLabel.Text = "Available";
+                this.Invoke(new MethodInvoker(delegate
+                {
+                    serverStatusLabel.Text = "Available";
+                }));
+                
             }
             else
             {
                 serverStatusLabel.Text = "Not Available";
             }
 
-            lastConnectionTimeLabel.Text = runningConfiguration.ServerLastConnectionTime.ToLongTimeString();
+            this.Invoke(new MethodInvoker(delegate
+            {
+                lastConnectionTimeLabel.Text = runningConfiguration.ServerLastConnectionTime.ToLongTimeString();
+            }));
+
         }
 
         private void AppendLogs(object sender, EventArgs args)
@@ -100,22 +135,29 @@ namespace Bugtracker.GUI
 
         private void LoadAllApplicationsAsCheckboxes(RunningConfiguration rc)
         {
-            CheckBox cb;
+
             FlowLayoutPanel flp = (FlowLayoutPanel) this.Controls.Find("applicationPanel", true)[0];
 
-            foreach (var application in rc.ApplicationManager.GetApplications())
+            foreach (var application in rc.Applications.GetApplications())
             {
-                if ((application.ShowSpecifier == Application.ShowAppSpecifier.installed && application.IsInstalled) || application.ShowSpecifier == Application.ShowAppSpecifier.always)
+                if ((application.ShowSpecifier == Application.ShowAppSpecifier.installed && application.IsInstalled) || 
+                    application.ShowSpecifier == Application.ShowAppSpecifier.always)
                 {
-                    cb = new CheckBox();
+
+                    CheckBox cb = new CheckBox();
+
                     cb.Text = application.Name;
                     cb.Name = "applicationCheckbox";
                     cb.AutoSize = false;
-                    cb.MinimumSize = new Size(75, 35);
-                    cb.CheckStateChanged += new System.EventHandler(CheckstateChangeLog);
+
+                    cb.Anchor = (AnchorStyles)((int)AnchorStyles.Top + (int)AnchorStyles.Left);
+                    cb.Margin = new Padding(2,2,2,2);
+                    cb.MaximumSize = new Size(240, 33);
+                    cb.Size = new Size(240, 33);
+
+                    cb.CheckStateChanged += new EventHandler(CheckstateChangeLog);
                     flp.Controls.Add(cb);
                 }
-
             }
         }
 
@@ -129,7 +171,7 @@ namespace Bugtracker.GUI
             var cb = (ComboBox) this.Controls.Find("problemCategories", true)[0];
 
 
-            foreach (var problemCategory in rc.ProblemManager.ProblemCategories)
+            foreach (var problemCategory in rc.ProblemCategories.ProblemCategories)
             {
                 cb.Items.Add(problemCategory.Name);
             }
@@ -146,7 +188,7 @@ namespace Bugtracker.GUI
         {
             var lb = (Label) this.Controls.Find("pcName", true)[0];
 
-            lb.Text = rc.PcInfo.GetHostname();
+            lb.Text = Bugtracker.Globals_and_Information.PCInfo.Hostname;
         }
 
         private void problemCategories_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -156,21 +198,22 @@ namespace Bugtracker.GUI
             var cb = (ComboBox) sender;
 
             var description =
-                runningConfiguration.ProblemManager.GetDescriptionForProblemByName((string) cb.SelectedItem);
+                runningConfiguration.ProblemCategories.GetDescriptionForProblemByName((string) cb.SelectedItem);
 
             var tb = (TextBox) this.Controls.Find("problemDescription", true)[0];
 
             tb.Text = description + Environment.NewLine;
 
-
             CheckApplicationCheckboxesAccordingToProblemCategoryName((string)cb.SelectedItem);
+
+            runningConfiguration.SelectedProblemCategory = runningConfiguration.ProblemCategories.GetProblemCategoryByName((string) cb.SelectedItem);
 
             Logger.Log("Changed Problem Category to " + (string) cb.SelectedItem, LoggingSeverity.Info);
         }
         
         public void CheckApplicationCheckboxesAccordingToProblemCategoryName(string problemCategoryName)
         {
-            var pc = RunningConfiguration.GetInstance().ProblemManager.GetProblemCategoryByName(problemCategoryName);
+            var pc = RunningConfiguration.GetInstance().ProblemCategories.GetProblemCategoryByName(problemCategoryName);
 
             if (pc.SelectAllApplications)
                 ChangeCheckBoxState(true);
@@ -209,14 +252,14 @@ namespace Bugtracker.GUI
         private void ShowLoggingWindow()
         {
             ToggleLog.Checked = true;
-            this.Size = new Size(850, 625);
+            this.Size = new Size(704, 650);
             showLogging = true;
         }
 
         private void HideLoggingWindow()
         {
             ToggleLog.Checked = false;
-            this.Size = new Size(450, 625);
+            this.Size = new Size(368, 650);
             showLogging = false;
         }
 
@@ -234,7 +277,7 @@ namespace Bugtracker.GUI
 
         private void DelayedSend(object sender, EventArgs e)
         {
-            SendHandler sh = new SendHandler(runningConfiguration.TargetManager.GetDefaultTargets());
+            SendHandler sh = new SendHandler(runningConfiguration.Targets.GetDefaultTargets());
             sh.Send(GetCurrentProblemDescriptor());
 
             this.Dispose();
@@ -242,10 +285,16 @@ namespace Bugtracker.GUI
             ScreenshotTimer.Dispose();
         }
 
-        private List<InternalApplication.Application> GetAllTargetedApplications()
+        public void ChangeBugtrackerVersioName()
+        {
+            //if (ApplicationDeployment.IsNetworkDeployed)
+             //   myVersion = ApplicationDeployment.CurrentDeployment.CurrentVersion;
+        }
+
+        public List<InternalApplication.Application> GetAllTargetedApplications()
         {
             List<InternalApplication.Application> targetedApplications = new List<InternalApplication.Application>();
-            ApplicationManager am = runningConfiguration.ApplicationManager;
+            ApplicationManager am = runningConfiguration.Applications;
 
             foreach (string app in GetApplicationsChecked())
             {
@@ -253,7 +302,7 @@ namespace Bugtracker.GUI
                     targetedApplications.Add(am.GetApplicationByName(app));
             }
 
-            foreach (var app in runningConfiguration.ApplicationManager.Applications)
+            foreach (var app in runningConfiguration.Applications.Applications)
             {
                 if (app.IsStandard)
                     targetedApplications.Add(app);
@@ -264,12 +313,12 @@ namespace Bugtracker.GUI
 
         private void StartScreenshotRoutine()
         {
-            if (screenshotCheckbox.Checked)
-            {
-                ScreenshotTimer.Tick += DelayScreenshot;
-                this.WindowState = FormWindowState.Minimized;
-                ScreenshotTimer.Start();
-            }
+            //if (screenshotCheckbox.Checked)
+            //{
+            //    ScreenshotTimer.Tick += DelayScreenshot;
+            //    this.WindowState = FormWindowState.Minimized;
+            //    ScreenshotTimer.Start();
+            //}
         }
 
         private void CaptureSendCloseButton(object sender, EventArgs e)
@@ -291,7 +340,7 @@ namespace Bugtracker.GUI
 
             ProblemDescriptor descriptor = new ProblemDescriptor
             {
-                ProblemCategory = runningConfiguration.ProblemManager.GetProblemCategoryByName((string) cb.SelectedItem),
+                ProblemCategory = runningConfiguration.ProblemCategories.GetProblemCategoryByName((string) cb.SelectedItem),
                 ProblemDescription = tb.Text
             };
 
@@ -337,38 +386,81 @@ namespace Bugtracker.GUI
             LogProcessor.DeleteAllTargeted(GetAllTargetedApplications());
         }
 
-        private void ReproducableScreenshotToolStrip(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-            Reproduzirbar reprodForm = new Reproduzirbar();
-            reprodForm.TopMost = true;
-            reprodForm.Show(this);
-            reprodForm.Disposed += new EventHandler(MaximizeBugtracker);
-        }
-
-        private void ScreenshotAllToolStrip(object sender, EventArgs e)
-        {
-            BugtrackerUtils.GenerateScreenCapture();
-        }
-
         private void ComputerInfoToolStrip(object sender, EventArgs e)
         {
             if (pcinfo == null || pcinfo.IsDisposed)
                 pcinfo = new PCInfo();
 
-
-            pcinfo.Show(this);
-        }
-
-        private void SnippingToolToolStrip(object sender, EventArgs e)
-        {
-            ScreenCaptureHandler sch = new ScreenCaptureHandler();
-            sch.GenerateScreenshotFromBitmap(runningConfiguration.NewestBugtrackerFolder.FullName, new Bitmap(SnippingTool.Snip()));
+            pcinfo.ShowDialog(this);
         }
 
         private void ExitToolStrip(object sender, EventArgs e)
         {
             this.Dispose();
+        }
+
+        private void Bugtracker_Main_Form_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void support_button_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void selection_screenshot_button_Click(object sender, EventArgs e)
+        {
+            ScreenCaptureHandler sch = new ScreenCaptureHandler();
+            sch.GenerateScreenshotFromBitmap(runningConfiguration.NewestBugtrackerFolder.FullName, new Bitmap(SnippingTool.Snip()));
+            UtilFunctions.PlayShutterSound();
+        }
+
+        private void full_screenshot_button_Click(object sender, EventArgs e)
+        {
+            BugtrackerUtils.GenerateScreenCapture();
+            UtilFunctions.PlayShutterSound();
+        }
+
+        private void procedure_screenshot_button_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+            Reproduzirbar reprodForm = new Reproduzirbar();
+            reprodForm.BugtrackerMainForm = this;
+            reprodForm.TopMost = true;
+            reprodForm.Show(this);
+
+            reprodForm.Disposed += new EventHandler(MaximizeBugtracker);
+        }
+
+        private void faq_button_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+        }
+
+        private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
+        {
+
+        }
+
+        private void screenshotCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

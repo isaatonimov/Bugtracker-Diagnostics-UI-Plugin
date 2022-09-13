@@ -29,50 +29,62 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Reproduzirbar));
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.startButton = new System.Windows.Forms.Button();
+            this.stopButton = new System.Windows.Forms.Button();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // button1
+            // startButton
             // 
-            this.button1.BackColor = System.Drawing.Color.LimeGreen;
-            this.button1.Location = new System.Drawing.Point(12, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(255, 39);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Start";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.startButtonClick);
+            this.startButton.BackColor = System.Drawing.Color.LimeGreen;
+            this.startButton.Location = new System.Drawing.Point(3, 3);
+            this.startButton.Name = "startButton";
+            this.startButton.Size = new System.Drawing.Size(255, 40);
+            this.startButton.TabIndex = 0;
+            this.startButton.Text = "Start";
+            this.startButton.UseVisualStyleBackColor = false;
+            this.startButton.Click += new System.EventHandler(this.startButtonClick);
             // 
-            // button2
+            // stopButton
             // 
-            this.button2.BackColor = System.Drawing.Color.Brown;
-            this.button2.Location = new System.Drawing.Point(12, 57);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(255, 39);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Stop";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.stopButtonClick);
+            this.stopButton.BackColor = System.Drawing.Color.Brown;
+            this.stopButton.Location = new System.Drawing.Point(3, 49);
+            this.stopButton.Name = "stopButton";
+            this.stopButton.Size = new System.Drawing.Size(255, 0);
+            this.stopButton.TabIndex = 1;
+            this.stopButton.Text = "Stop";
+            this.stopButton.UseVisualStyleBackColor = false;
+            this.stopButton.Click += new System.EventHandler(this.stopButtonClick);
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.startButton);
+            this.flowLayoutPanel1.Controls.Add(this.stopButton);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(1, 12);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(268, 99);
+            this.flowLayoutPanel1.TabIndex = 2;
             // 
             // Reproduzirbar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(279, 109);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(278, 114);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Reproduzirbar";
             this.Text = "Reproduzierbares Problem";
+            this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private Button button1;
-        private Button button2;
+        private Button startButton;
+        private Button stopButton;
+        private FlowLayoutPanel flowLayoutPanel1;
     }
 }

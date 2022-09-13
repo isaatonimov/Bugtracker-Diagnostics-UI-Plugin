@@ -1,12 +1,15 @@
-﻿using System.Media;
+﻿using Bugtracker.Capture.LogProcessing;
 using Bugtracker.Capture.Screen;
 using Bugtracker.Configuration;
-using Bugtracker.Utils;
+using Bugtracker.GUI;
+using Bugtracker_UI.Utils;
 
 namespace Bugtracker_UI.GUI
 {
     public partial class Reproduzirbar : Form
     {
+        public Bugtracker_Main_Form BugtrackerMainForm;
+
         private bool isRecording;
         ScreenCaptureHandler sch;
         System.Windows.Forms.Timer screenshotTimer = new System.Windows.Forms.Timer();
@@ -16,28 +19,28 @@ namespace Bugtracker_UI.GUI
         {
             InitializeComponent();
 
-            //this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            //this.Load += new System.EventHandler(Form_Load);
-            //this.TopMost = true;
-
             this.BringToFront();
             this.Activate();
             this.Focus();
-
 
             screenshotTimer.Tick += new EventHandler(screenshotTimerTick);
             screenshotTimer.Interval = 250;
 
             sch = new ScreenCaptureHandler();
 
-            this.Deactivate += generateScreenshot;
-
-            this.DoubleBuffered = true;
+            //this.Deactivate += generateScreenshot;
+            //this.DoubleBuffered = true;
 
             BackColor = Color.White;
             FormBorderStyle = FormBorderStyle.None;
             Bounds = Screen.PrimaryScreen.Bounds;
             TransparencyKey = BackColor;
+
+        }
+
+        void OnMouseClick()
+        {
+
         }
 
         private void Form_Load(object sender, EventArgs e)
@@ -49,22 +52,18 @@ namespace Bugtracker_UI.GUI
 
         private void screenshotTimerTick(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Normal;
-            screenshotTimer.Stop();
+            //if()
         }
 
         private void generateScreenshot(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("Lost Focus");
-
             if (isRecording)
             {
-                //SystemSounds.Exclamation.Play();
-
                 this.WindowState = FormWindowState.Minimized;
 
                 System.Diagnostics.Debug.WriteLine("Took screenshot");
                 sch.GenerateScreenshot(RunningConfiguration.GetInstance().NewestBugtrackerFolder.FullName, true);
+                UtilFunctions.PlayShutterSound();
 
                 screenshotTimer.Start();
 
@@ -76,11 +75,32 @@ namespace Bugtracker_UI.GUI
 
         private void startButtonClick(object sender, EventArgs e)
         {
+            string targetApps = "";
+
+            foreach(var Target in BugtrackerMainForm.GetAllTargetedApplications())
+            {
+                targetApps += Target.Name + Environment.NewLine;
+            }
+
+            DialogResult dialogResult = MessageBox.Show("Möchten sie die Logs vor aufzeichnung für folgende Applikationen löschen?:\n\n" + targetApps
+                , "Logs löschen?", MessageBoxButtons.YesNo);
+
+            if (dialogResult == DialogResult.Yes)
+            {
+                LogProcessor.DeleteAllTargeted(BugtrackerMainForm.GetAllTargetedApplications());
+            }
+
+            stopButton.Size = new Size(stopButton.Size.Width, 40);
+            startButton.Size = new Size(startButton.Size.Width, 0);
+
             isRecording = true;
+
         }
 
         private void stopButtonClick(object sender, EventArgs e)
         {
+            startButton.Size = new Size(startButton.Size.Width, 40);
+            stopButton.Size = new Size(stopButton.Size.Width, 0);
             isRecording = false;
             Dispose();
         }

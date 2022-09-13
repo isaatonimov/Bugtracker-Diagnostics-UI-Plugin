@@ -29,7 +29,15 @@ namespace Bugtracker_UI.GUI
                 return null;
             }
         }
-
+        /// <summary>
+        /// Main Window of Snipping Tool Component
+        /// Used foor taking a screenshot of an specified area.
+        /// Credits go to user:
+        /// https://stackoverflow.com/users/17034/hans-passant
+        /// https://stackoverflow.com/questions/3123776/net-equivalent-of-snipping-tool
+        /// 
+        /// </summary>
+        /// <param name="screenShot"></param>
         public SnippingTool(Image screenShot)
         {
             InitializeComponent();
