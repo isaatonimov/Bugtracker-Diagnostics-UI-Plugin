@@ -33,7 +33,7 @@ namespace Bugtracker.GUI
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Bugtracker_Main_Form));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.applicationPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.applicationCheckbox = new System.Windows.Forms.CheckBox();
+            this.screenshotCheckbox = new System.Windows.Forms.CheckBox();
             this.problemDescription = new System.Windows.Forms.TextBox();
             this.problemCategories = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -77,53 +77,49 @@ namespace Bugtracker.GUI
             // 
             this.groupBox1.Controls.Add(this.applicationPanel);
             this.groupBox1.ForeColor = System.Drawing.Color.Black;
-            this.groupBox1.Location = new System.Drawing.Point(18, 573);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox1.Location = new System.Drawing.Point(13, 344);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox1.Size = new System.Drawing.Size(330, 295);
+            this.groupBox1.Size = new System.Drawing.Size(225, 187);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Programme";
             // 
             // applicationPanel
             // 
-            this.applicationPanel.Controls.Add(this.applicationCheckbox);
+            this.applicationPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.applicationPanel.Controls.Add(this.screenshotCheckbox);
             this.applicationPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.applicationPanel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.applicationPanel.Location = new System.Drawing.Point(0, 22);
-            this.applicationPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.applicationPanel.Location = new System.Drawing.Point(6, 16);
             this.applicationPanel.Name = "applicationPanel";
-            this.applicationPanel.Padding = new System.Windows.Forms.Padding(8);
-            this.applicationPanel.Size = new System.Drawing.Size(315, 272);
+            this.applicationPanel.Padding = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            this.applicationPanel.Size = new System.Drawing.Size(214, 165);
             this.applicationPanel.TabIndex = 0;
             this.applicationPanel.WrapContents = false;
             // 
-            // applicationCheckbox
+            // screenshotCheckbox
             // 
-            this.applicationCheckbox.Checked = true;
-            this.applicationCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.applicationCheckbox.ForeColor = System.Drawing.Color.Black;
-            this.applicationCheckbox.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.applicationCheckbox.Location = new System.Drawing.Point(10, 10);
-            this.applicationCheckbox.Margin = new System.Windows.Forms.Padding(2);
-            this.applicationCheckbox.MaximumSize = new System.Drawing.Size(142, 67);
-            this.applicationCheckbox.Name = "applicationCheckbox";
-            this.applicationCheckbox.Padding = new System.Windows.Forms.Padding(2);
-            this.applicationCheckbox.Size = new System.Drawing.Size(142, 33);
-            this.applicationCheckbox.TabIndex = 1;
-            this.applicationCheckbox.Text = "Screen";
-            this.applicationCheckbox.UseVisualStyleBackColor = true;
-            this.applicationCheckbox.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.screenshotCheckbox.Checked = true;
+            this.screenshotCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.screenshotCheckbox.ForeColor = System.Drawing.Color.Black;
+            this.screenshotCheckbox.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.screenshotCheckbox.Location = new System.Drawing.Point(8, 7);
+            this.screenshotCheckbox.Margin = new System.Windows.Forms.Padding(2);
+            this.screenshotCheckbox.Name = "screenshotCheckbox";
+            this.screenshotCheckbox.Padding = new System.Windows.Forms.Padding(1);
+            this.screenshotCheckbox.Size = new System.Drawing.Size(190, 33);
+            this.screenshotCheckbox.TabIndex = 1;
+            this.screenshotCheckbox.Text = "Screen";
+            this.screenshotCheckbox.UseVisualStyleBackColor = true;
+            this.screenshotCheckbox.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // problemDescription
             // 
             this.problemDescription.ForeColor = System.Drawing.Color.Black;
-            this.problemDescription.Location = new System.Drawing.Point(18, 330);
-            this.problemDescription.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.problemDescription.Location = new System.Drawing.Point(13, 198);
             this.problemDescription.Multiline = true;
             this.problemDescription.Name = "problemDescription";
-            this.problemDescription.Size = new System.Drawing.Size(322, 231);
+            this.problemDescription.Size = new System.Drawing.Size(227, 140);
             this.problemDescription.TabIndex = 2;
             // 
             // problemCategories
@@ -131,10 +127,9 @@ namespace Bugtracker.GUI
             this.problemCategories.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.problemCategories.ForeColor = System.Drawing.Color.Black;
             this.problemCategories.FormattingEnabled = true;
-            this.problemCategories.Location = new System.Drawing.Point(18, 245);
-            this.problemCategories.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.problemCategories.Location = new System.Drawing.Point(13, 147);
             this.problemCategories.Name = "problemCategories";
-            this.problemCategories.Size = new System.Drawing.Size(322, 33);
+            this.problemCategories.Size = new System.Drawing.Size(227, 23);
             this.problemCategories.TabIndex = 3;
             this.problemCategories.SelectedIndexChanged += new System.EventHandler(this.problemCategories_SelectedIndexChanged);
             // 
@@ -143,10 +138,9 @@ namespace Bugtracker.GUI
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(26, 207);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(18, 124);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(159, 25);
+            this.label1.Size = new System.Drawing.Size(105, 15);
             this.label1.TabIndex = 4;
             this.label1.Text = "Problem Kategorie";
             // 
@@ -154,10 +148,9 @@ namespace Bugtracker.GUI
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(26, 293);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(18, 176);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(190, 25);
+            this.label2.Size = new System.Drawing.Size(127, 15);
             this.label2.TabIndex = 5;
             this.label2.Text = "Problem Beschreibung";
             // 
@@ -165,10 +158,9 @@ namespace Bugtracker.GUI
             // 
             this.captureAndSendButton.FlatAppearance.BorderSize = 0;
             this.captureAndSendButton.ForeColor = System.Drawing.Color.Black;
-            this.captureAndSendButton.Location = new System.Drawing.Point(18, 885);
-            this.captureAndSendButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.captureAndSendButton.Location = new System.Drawing.Point(13, 531);
             this.captureAndSendButton.Name = "captureAndSendButton";
-            this.captureAndSendButton.Size = new System.Drawing.Size(324, 55);
+            this.captureAndSendButton.Size = new System.Drawing.Size(225, 33);
             this.captureAndSendButton.TabIndex = 6;
             this.captureAndSendButton.Text = "Aufzeichnen und beenden";
             this.captureAndSendButton.UseVisualStyleBackColor = false;
@@ -178,21 +170,19 @@ namespace Bugtracker.GUI
             // 
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.label3.Location = new System.Drawing.Point(26, 128);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(18, 77);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(113, 25);
+            this.label3.Size = new System.Drawing.Size(75, 15);
             this.label3.TabIndex = 7;
             this.label3.Text = "Problem Zeit";
             // 
             // bugtrackTime
             // 
             this.bugtrackTime.ForeColor = System.Drawing.Color.Black;
-            this.bugtrackTime.Location = new System.Drawing.Point(18, 160);
-            this.bugtrackTime.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.bugtrackTime.Location = new System.Drawing.Point(13, 96);
             this.bugtrackTime.Name = "bugtrackTime";
             this.bugtrackTime.ReadOnly = true;
-            this.bugtrackTime.Size = new System.Drawing.Size(322, 31);
+            this.bugtrackTime.Size = new System.Drawing.Size(227, 23);
             this.bugtrackTime.TabIndex = 8;
             // 
             // menuStrip2
@@ -203,8 +193,7 @@ namespace Bugtracker.GUI
             this.funktionenToolStripMenuItem});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Padding = new System.Windows.Forms.Padding(8, 3, 0, 3);
-            this.menuStrip2.Size = new System.Drawing.Size(526, 35);
+            this.menuStrip2.Size = new System.Drawing.Size(1084, 24);
             this.menuStrip2.TabIndex = 9;
             this.menuStrip2.Text = "menuStrip2";
             // 
@@ -217,14 +206,14 @@ namespace Bugtracker.GUI
             this.beendenToolStripMenuItem});
             this.toolStripMenuItem1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(103, 29);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(69, 20);
             this.toolStripMenuItem1.Text = "Optionen";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // computerInfosToolStripMenuItem
             // 
             this.computerInfosToolStripMenuItem.Name = "computerInfosToolStripMenuItem";
-            this.computerInfosToolStripMenuItem.Size = new System.Drawing.Size(289, 34);
+            this.computerInfosToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.computerInfosToolStripMenuItem.Text = "Computer Infos";
             this.computerInfosToolStripMenuItem.Click += new System.EventHandler(this.ComputerInfoToolStrip);
             // 
@@ -232,20 +221,20 @@ namespace Bugtracker.GUI
             // 
             this.mailversandAktivierenToolStripMenuItem.Enabled = false;
             this.mailversandAktivierenToolStripMenuItem.Name = "mailversandAktivierenToolStripMenuItem";
-            this.mailversandAktivierenToolStripMenuItem.Size = new System.Drawing.Size(289, 34);
+            this.mailversandAktivierenToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.mailversandAktivierenToolStripMenuItem.Text = "Mailversand aktivieren";
             // 
             // ToggleLog
             // 
             this.ToggleLog.Name = "ToggleLog";
-            this.ToggleLog.Size = new System.Drawing.Size(289, 34);
+            this.ToggleLog.Size = new System.Drawing.Size(192, 22);
             this.ToggleLog.Text = "Toggle Log Fenster";
             this.ToggleLog.Click += new System.EventHandler(this.ToggleLogToolStrip);
             // 
             // beendenToolStripMenuItem
             // 
             this.beendenToolStripMenuItem.Name = "beendenToolStripMenuItem";
-            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(289, 34);
+            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.beendenToolStripMenuItem.Text = "Beenden";
             this.beendenToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStrip);
             // 
@@ -255,14 +244,14 @@ namespace Bugtracker.GUI
             this.logsLöschenToolStripMenuItem,
             this.logsUmbennennToolStripMenuItem});
             this.funktionenToolStripMenuItem.Name = "funktionenToolStripMenuItem";
-            this.funktionenToolStripMenuItem.Size = new System.Drawing.Size(99, 29);
+            this.funktionenToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
             this.funktionenToolStripMenuItem.Text = "Aktionen";
             // 
             // logsLöschenToolStripMenuItem
             // 
             this.logsLöschenToolStripMenuItem.Enabled = false;
             this.logsLöschenToolStripMenuItem.Name = "logsLöschenToolStripMenuItem";
-            this.logsLöschenToolStripMenuItem.Size = new System.Drawing.Size(261, 34);
+            this.logsLöschenToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.logsLöschenToolStripMenuItem.Text = "Logs löschen";
             this.logsLöschenToolStripMenuItem.Click += new System.EventHandler(this.DeleteTargetedLogsToolStrip);
             // 
@@ -270,7 +259,7 @@ namespace Bugtracker.GUI
             // 
             this.logsUmbennennToolStripMenuItem.Enabled = false;
             this.logsUmbennennToolStripMenuItem.Name = "logsUmbennennToolStripMenuItem";
-            this.logsUmbennennToolStripMenuItem.Size = new System.Drawing.Size(261, 34);
+            this.logsUmbennennToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.logsUmbennennToolStripMenuItem.Text = "Logs umbenennen";
             this.logsUmbennennToolStripMenuItem.Click += new System.EventHandler(this.RenameTargetedLogsToolStrip);
             // 
@@ -279,10 +268,9 @@ namespace Bugtracker.GUI
             this.pcName.AutoSize = true;
             this.pcName.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.pcName.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.pcName.Location = new System.Drawing.Point(18, 48);
-            this.pcName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.pcName.Location = new System.Drawing.Point(13, 29);
             this.pcName.Name = "pcName";
-            this.pcName.Size = new System.Drawing.Size(136, 41);
+            this.pcName.Size = new System.Drawing.Size(90, 28);
             this.pcName.TabIndex = 10;
             this.pcName.Text = "PC0X-XX";
             // 
@@ -292,14 +280,13 @@ namespace Bugtracker.GUI
             this.bugtrackLog.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.bugtrackLog.ForeColor = System.Drawing.Color.White;
             this.bugtrackLog.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.bugtrackLog.Location = new System.Drawing.Point(528, 62);
-            this.bugtrackLog.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.bugtrackLog.Location = new System.Drawing.Point(370, 29);
             this.bugtrackLog.Multiline = true;
             this.bugtrackLog.Name = "bugtrackLog";
             this.bugtrackLog.ReadOnly = true;
             this.bugtrackLog.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.bugtrackLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.bugtrackLog.Size = new System.Drawing.Size(464, 975);
+            this.bugtrackLog.Size = new System.Drawing.Size(702, 557);
             this.bugtrackLog.TabIndex = 11;
             this.bugtrackLog.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -307,10 +294,9 @@ namespace Bugtracker.GUI
             // 
             this.label5.AutoSize = true;
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(18, 945);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Location = new System.Drawing.Point(13, 571);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(227, 25);
+            this.label5.Size = new System.Drawing.Size(151, 15);
             this.label5.TabIndex = 13;
             this.label5.Text = "Konfiguration geladen von:";
             // 
@@ -318,10 +304,9 @@ namespace Bugtracker.GUI
             // 
             this.configFileSourceLabel.AutoSize = true;
             this.configFileSourceLabel.ForeColor = System.Drawing.Color.Black;
-            this.configFileSourceLabel.Location = new System.Drawing.Point(260, 945);
-            this.configFileSourceLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.configFileSourceLabel.Location = new System.Drawing.Point(182, 571);
             this.configFileSourceLabel.Name = "configFileSourceLabel";
-            this.configFileSourceLabel.Size = new System.Drawing.Size(73, 25);
+            this.configFileSourceLabel.Size = new System.Drawing.Size(46, 15);
             this.configFileSourceLabel.TabIndex = 14;
             this.configFileSourceLabel.Text = "SERVER";
             // 
@@ -338,10 +323,9 @@ namespace Bugtracker.GUI
             this.toolStripStatusLabel1,
             this.lastConnectionTimeLabel,
             this.serverStatusLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 1051);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 589);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Padding = new System.Windows.Forms.Padding(2, 0, 20, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(526, 32);
+            this.statusStrip1.Size = new System.Drawing.Size(1084, 22);
             this.statusStrip1.TabIndex = 16;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -349,7 +333,7 @@ namespace Bugtracker.GUI
             // 
             this.toolStripStatusLabel1.ForeColor = System.Drawing.Color.Black;
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(248, 25);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(165, 17);
             this.toolStripStatusLabel1.Text = "Server letztes mal erreicht um:";
             // 
             // lastConnectionTimeLabel
@@ -357,7 +341,7 @@ namespace Bugtracker.GUI
             this.lastConnectionTimeLabel.ForeColor = System.Drawing.Color.Black;
             this.lastConnectionTimeLabel.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
             this.lastConnectionTimeLabel.Name = "lastConnectionTimeLabel";
-            this.lastConnectionTimeLabel.Size = new System.Drawing.Size(80, 25);
+            this.lastConnectionTimeLabel.Size = new System.Drawing.Size(49, 17);
             this.lastConnectionTimeLabel.Text = "16:45:30";
             // 
             // serverStatusLabel
@@ -365,7 +349,7 @@ namespace Bugtracker.GUI
             this.serverStatusLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.serverStatusLabel.ForeColor = System.Drawing.Color.Black;
             this.serverStatusLabel.Name = "serverStatusLabel";
-            this.serverStatusLabel.Size = new System.Drawing.Size(103, 25);
+            this.serverStatusLabel.Size = new System.Drawing.Size(67, 17);
             this.serverStatusLabel.Text = "Connected";
             // 
             // selection_screenshot_button
@@ -376,10 +360,9 @@ namespace Bugtracker.GUI
             this.selection_screenshot_button.FlatAppearance.BorderColor = System.Drawing.SystemColors.ScrollBar;
             this.selection_screenshot_button.FlatAppearance.BorderSize = 0;
             this.selection_screenshot_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.selection_screenshot_button.Location = new System.Drawing.Point(40, 353);
-            this.selection_screenshot_button.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.selection_screenshot_button.Location = new System.Drawing.Point(24, 250);
             this.selection_screenshot_button.Name = "selection_screenshot_button";
-            this.selection_screenshot_button.Size = new System.Drawing.Size(88, 75);
+            this.selection_screenshot_button.Size = new System.Drawing.Size(62, 45);
             this.selection_screenshot_button.TabIndex = 19;
             this.selection_screenshot_button.UseVisualStyleBackColor = false;
             this.selection_screenshot_button.Click += new System.EventHandler(this.selection_screenshot_button_Click);
@@ -393,10 +376,9 @@ namespace Bugtracker.GUI
             this.procedure_screenshot_button.FlatAppearance.BorderColor = System.Drawing.SystemColors.ScrollBar;
             this.procedure_screenshot_button.FlatAppearance.BorderSize = 0;
             this.procedure_screenshot_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.procedure_screenshot_button.Location = new System.Drawing.Point(16, 203);
-            this.procedure_screenshot_button.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.procedure_screenshot_button.Location = new System.Drawing.Point(9, 142);
             this.procedure_screenshot_button.Name = "procedure_screenshot_button";
-            this.procedure_screenshot_button.Size = new System.Drawing.Size(132, 110);
+            this.procedure_screenshot_button.Size = new System.Drawing.Size(92, 66);
             this.procedure_screenshot_button.TabIndex = 18;
             this.procedure_screenshot_button.UseVisualStyleBackColor = false;
             this.procedure_screenshot_button.Click += new System.EventHandler(this.procedure_screenshot_button_Click);
@@ -409,10 +391,9 @@ namespace Bugtracker.GUI
             this.full_screenshot_button.FlatAppearance.BorderColor = System.Drawing.SystemColors.ScrollBar;
             this.full_screenshot_button.FlatAppearance.BorderSize = 0;
             this.full_screenshot_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.full_screenshot_button.Location = new System.Drawing.Point(16, 48);
-            this.full_screenshot_button.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.full_screenshot_button.Location = new System.Drawing.Point(9, 35);
             this.full_screenshot_button.Name = "full_screenshot_button";
-            this.full_screenshot_button.Size = new System.Drawing.Size(132, 110);
+            this.full_screenshot_button.Size = new System.Drawing.Size(92, 66);
             this.full_screenshot_button.TabIndex = 17;
             this.full_screenshot_button.UseVisualStyleBackColor = false;
             this.full_screenshot_button.Click += new System.EventHandler(this.full_screenshot_button_Click);
@@ -423,10 +404,9 @@ namespace Bugtracker.GUI
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(18, 18);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(10, 11);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(130, 25);
+            this.label4.Size = new System.Drawing.Size(83, 15);
             this.label4.TabIndex = 22;
             this.label4.Text = "Vollaufnahme";
             // 
@@ -435,10 +415,9 @@ namespace Bugtracker.GUI
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(42, 163);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Location = new System.Drawing.Point(27, 118);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(78, 25);
+            this.label6.Size = new System.Drawing.Size(52, 15);
             this.label6.TabIndex = 23;
             this.label6.Text = "Schritte";
             // 
@@ -447,33 +426,31 @@ namespace Bugtracker.GUI
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(36, 323);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Location = new System.Drawing.Point(21, 228);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(104, 25);
+            this.label7.Size = new System.Drawing.Size(68, 15);
             this.label7.TabIndex = 24;
             this.label7.Text = "Teilbereich";
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.full_screenshot_button);
             this.panel1.Controls.Add(this.procedure_screenshot_button);
             this.panel1.Controls.Add(this.selection_screenshot_button);
-            this.panel1.Location = new System.Drawing.Point(356, 48);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.panel1.Location = new System.Drawing.Point(249, 29);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(158, 975);
+            this.panel1.Size = new System.Drawing.Size(115, 557);
             this.panel1.TabIndex = 22;
             // 
             // Bugtracker_Main_Form
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(526, 1083);
+            this.ClientSize = new System.Drawing.Size(1084, 611);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.configFileSourceLabel);
@@ -492,7 +469,6 @@ namespace Bugtracker.GUI
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
             this.Name = "Bugtracker_Main_Form";
             this.Text = "Bugtracker";
@@ -549,6 +525,6 @@ namespace Bugtracker.GUI
         private Label label6;
         private Label label7;
         private Panel panel1;
-        private CheckBox applicationCheckbox;
+        private CheckBox screenshotCheckbox;
     }
 }

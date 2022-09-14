@@ -65,8 +65,8 @@ namespace Bugtracker.GUI
 
             applicationPanel.VerticalScroll.Enabled = true;
             applicationPanel.VerticalScroll.Visible = true;
-            applicationPanel.HorizontalScroll.Enabled = false;
             applicationPanel.HorizontalScroll.Visible = false;
+            applicationPanel.HorizontalScroll.Enabled = false;
             applicationPanel.AutoScroll = true;
 
             LoadAllApplicationsAsCheckboxes(rc);
@@ -83,7 +83,7 @@ namespace Bugtracker.GUI
             Server.CheckedServerStatus += new System.EventHandler(UpdateServerStatus);
             Logger.LoggedNewLine += new System.EventHandler(AppendLogs);
 
-            this.Size = new Size(368, 650);
+            this.Size = new Size(390, 650);
         }
 
         private void CheckStandardApplications(RunningConfiguration rc)
@@ -150,10 +150,10 @@ namespace Bugtracker.GUI
                     cb.Name = "applicationCheckbox";
                     cb.AutoSize = false;
 
-                    cb.Anchor = (AnchorStyles)((int)AnchorStyles.Top + (int)AnchorStyles.Left);
+                    //cb.Anchor = (AnchorStyles)((int)AnchorStyles.Top + (int)AnchorStyles.Left);
                     cb.Margin = new Padding(2,2,2,2);
-                    cb.MaximumSize = new Size(240, 33);
-                    cb.Size = new Size(240, 33);
+                    cb.MaximumSize = new Size(190, 33);
+                    cb.Size = new Size(190, 33);
 
                     cb.CheckStateChanged += new EventHandler(CheckstateChangeLog);
                     flp.Controls.Add(cb);
@@ -252,14 +252,14 @@ namespace Bugtracker.GUI
         private void ShowLoggingWindow()
         {
             ToggleLog.Checked = true;
-            this.Size = new Size(704, 650);
+            this.Size = new Size(1100, 650);
             showLogging = true;
         }
 
         private void HideLoggingWindow()
         {
             ToggleLog.Checked = false;
-            this.Size = new Size(368, 650);
+            this.Size = new Size(390, 650);
             showLogging = false;
         }
 
@@ -313,12 +313,12 @@ namespace Bugtracker.GUI
 
         private void StartScreenshotRoutine()
         {
-            //if (screenshotCheckbox.Checked)
-            //{
-            //    ScreenshotTimer.Tick += DelayScreenshot;
-            //    this.WindowState = FormWindowState.Minimized;
-            //    ScreenshotTimer.Start();
-            //}
+            if (screenshotCheckbox.Checked)
+            {
+                ScreenshotTimer.Tick += DelayScreenshot;
+                this.WindowState = FormWindowState.Minimized;
+                ScreenshotTimer.Start();
+            }
         }
 
         private void CaptureSendCloseButton(object sender, EventArgs e)

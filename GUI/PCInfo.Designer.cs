@@ -40,7 +40,6 @@ namespace Bugtracker.GUI
             this.pluginsList = new System.Windows.Forms.ListBox();
             this.Plugins = new System.Windows.Forms.TabControl();
             this.generalTab = new System.Windows.Forms.TabPage();
-            this.label1 = new System.Windows.Forms.Label();
             this.exitButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.targetManagerBindingSource)).BeginInit();
@@ -54,14 +53,14 @@ namespace Bugtracker.GUI
             // 
             // pcInfoText
             // 
-            this.pcInfoText.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.pcInfoText.BackColor = System.Drawing.Color.White;
             this.pcInfoText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pcInfoText.ForeColor = System.Drawing.Color.White;
+            this.pcInfoText.ForeColor = System.Drawing.Color.Black;
             this.pcInfoText.Location = new System.Drawing.Point(6, 6);
             this.pcInfoText.Multiline = true;
             this.pcInfoText.Name = "pcInfoText";
             this.pcInfoText.ReadOnly = true;
-            this.pcInfoText.Size = new System.Drawing.Size(413, 213);
+            this.pcInfoText.Size = new System.Drawing.Size(413, 392);
             this.pcInfoText.TabIndex = 0;
             this.pcInfoText.TextChanged += new System.EventHandler(this.pcInfoText_TextChanged);
             // 
@@ -76,52 +75,53 @@ namespace Bugtracker.GUI
             // 
             // variablesTab
             // 
-            this.variablesTab.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.variablesTab.BackColor = System.Drawing.Color.White;
             this.variablesTab.Controls.Add(this.dataGridVariables);
             this.variablesTab.Location = new System.Drawing.Point(4, 24);
             this.variablesTab.Name = "variablesTab";
             this.variablesTab.Padding = new System.Windows.Forms.Padding(3);
-            this.variablesTab.Size = new System.Drawing.Size(425, 207);
+            this.variablesTab.Size = new System.Drawing.Size(425, 404);
             this.variablesTab.TabIndex = 1;
             this.variablesTab.Text = "Variablen";
             // 
             // dataGridVariables
             // 
             this.dataGridVariables.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridVariables.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.dataGridVariables.BackgroundColor = System.Drawing.Color.White;
             this.dataGridVariables.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridVariables.GridColor = System.Drawing.Color.White;
+            this.dataGridVariables.GridColor = System.Drawing.Color.Black;
             this.dataGridVariables.Location = new System.Drawing.Point(6, 6);
             this.dataGridVariables.Name = "dataGridVariables";
             this.dataGridVariables.RowHeadersWidth = 4;
-            this.dataGridVariables.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.dataGridVariables.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.White;
+            this.dataGridVariables.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.White;
+            this.dataGridVariables.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
             this.dataGridVariables.RowTemplate.Height = 25;
             this.dataGridVariables.RowTemplate.ReadOnly = true;
             this.dataGridVariables.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dataGridVariables.Size = new System.Drawing.Size(413, 211);
+            this.dataGridVariables.Size = new System.Drawing.Size(413, 392);
             this.dataGridVariables.TabIndex = 0;
             // 
             // pluginsTab
             // 
-            this.pluginsTab.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.pluginsTab.BackColor = System.Drawing.Color.White;
             this.pluginsTab.Controls.Add(this.pluginsList);
+            this.pluginsTab.ForeColor = System.Drawing.Color.Black;
             this.pluginsTab.Location = new System.Drawing.Point(4, 24);
             this.pluginsTab.Name = "pluginsTab";
             this.pluginsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.pluginsTab.Size = new System.Drawing.Size(425, 207);
+            this.pluginsTab.Size = new System.Drawing.Size(425, 404);
             this.pluginsTab.TabIndex = 0;
             this.pluginsTab.Text = "Pugins";
             // 
             // pluginsList
             // 
-            this.pluginsList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.pluginsList.ForeColor = System.Drawing.Color.White;
+            this.pluginsList.BackColor = System.Drawing.Color.White;
+            this.pluginsList.ForeColor = System.Drawing.Color.Black;
             this.pluginsList.FormattingEnabled = true;
             this.pluginsList.ItemHeight = 15;
             this.pluginsList.Location = new System.Drawing.Point(6, 6);
             this.pluginsList.Name = "pluginsList";
-            this.pluginsList.Size = new System.Drawing.Size(413, 214);
+            this.pluginsList.Size = new System.Drawing.Size(413, 394);
             this.pluginsList.TabIndex = 2;
             // 
             // Plugins
@@ -132,28 +132,19 @@ namespace Bugtracker.GUI
             this.Plugins.Location = new System.Drawing.Point(12, 56);
             this.Plugins.Name = "Plugins";
             this.Plugins.SelectedIndex = 0;
-            this.Plugins.Size = new System.Drawing.Size(433, 235);
+            this.Plugins.Size = new System.Drawing.Size(433, 432);
             this.Plugins.TabIndex = 0;
             // 
             // generalTab
             // 
-            this.generalTab.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.generalTab.BackColor = System.Drawing.Color.White;
             this.generalTab.Controls.Add(this.pcInfoText);
             this.generalTab.Location = new System.Drawing.Point(4, 24);
             this.generalTab.Name = "generalTab";
             this.generalTab.Padding = new System.Windows.Forms.Padding(3);
-            this.generalTab.Size = new System.Drawing.Size(425, 207);
+            this.generalTab.Size = new System.Drawing.Size(425, 404);
             this.generalTab.TabIndex = 2;
             this.generalTab.Text = "Generell";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 15);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "label1";
             // 
             // exitButton
             // 
@@ -171,7 +162,7 @@ namespace Bugtracker.GUI
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.ForeColor = System.Drawing.Color.Black;
             this.label2.Location = new System.Drawing.Point(12, 12);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(122, 30);
@@ -182,11 +173,10 @@ namespace Bugtracker.GUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(451, 303);
+            this.BackColor = System.Drawing.SystemColors.Window;
+            this.ClientSize = new System.Drawing.Size(451, 500);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.exitButton);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.Plugins);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -218,7 +208,6 @@ namespace Bugtracker.GUI
         private ListBox pluginsList;
         private TabControl Plugins;
         private TabPage generalTab;
-        private Label label1;
         private Button exitButton;
         private Label label2;
     }
